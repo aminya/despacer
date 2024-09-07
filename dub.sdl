@@ -19,6 +19,7 @@ dflags "--link-internally" platform="windows-ldc"
 // support SIMD
 dflags "-mcpu=native"
 
-preBuildCommands "cmake -S ./ -B ./build && cmake --build ./build --config Release"
+preBuildCommands "cmake -S ./ -B ./build -DBENCHMARKS=OFF -DUNIT_TESTS=OFF && cmake --build ./build --config Release" platform="posix"
+preBuildCommands "cmake -G \"Ninja Multi-Config\" -S ./ -B ./build -DBENCHMARKS=OFF -DUNIT_TESTS=OFF && cmake --build ./build --config Release" platform="windows"
 
 extraDependencyFiles "./CMakeLists.txt" "./include/**/*" "./src/**/*"
